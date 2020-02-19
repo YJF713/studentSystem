@@ -21,12 +21,12 @@
           <div class="navbar-wrapper">
             <ul class="nav navbar-nav nav-items">
                 <li>
-                    <a class="nav-item" href="#">
+                    <a class="nav-item" href="#"  data-toggle="modal" data-target="#infoModal">
                         <span>消息</span>
                     </a>
                 </li>
                 <li>
-                    <a class="nav-item" href="#">
+                    <a class="nav-item" href="#" data-toggle="modal" data-target="#setModal" >
                         <span>设置</span>
                     </a>
                 </li>
@@ -37,7 +37,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#">退出</a>
+                            <a href="login.html">退出</a>
                         </li>
                         <li>
                             <a href="#">注销</a>
@@ -46,6 +46,7 @@
                             <a href="#">切换账号</a>
                         </li>
                         <li class="divider"></li>
+                        <!-- 一条线 -->
                         <li>
                             <a href="#">帮助</a>
                         </li>
@@ -61,10 +62,92 @@
           <!-- 流式布局 -->
         <div class="container-fluid main-content">
           <div class="row mian-row">
-            <div class="col-md-2 left">left</div>
-            <div class="col-md-10 right">right</div>
+            <!-- 左侧边栏 -->
+            <div class="col-md-2 col-lg-2 left">
+                <div class="current-user">
+                    <span>当前用户：</span>
+                    <span class="uname">Admin</span>
+                </div>
+                <div class="class-div">
+                    <ul class="class-list">
+                      <li>1班</li>
+                      <li>2班</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 右侧边栏 -->
+            <div class="col-md-10 col-lg-10 right">right</div>
           </div>
         </div>
       </div>
+
+      <!-- $('#infoModal').modal('show') 表示再加载完页面时这个infoModal直接加载出来 -->
+      <!-- 消息的Modal -->
+      <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="infomyModalLabel">站内信</h4>
+            </div>
+            <div class="modal-body">
+                <ul>
+                  <li><a href="#">【系统信息】您已被选中花呗免还款！</a></li>
+                  <li>【系统信息】您已被选中信用卡免还款！</li>
+                  <li>【警示提示】勿信虚假信息！！</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+       <!-- 设置的Modal -->
+       <div class="modal fade" id="setModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="setmyModalLabel">系统设置</h4>
+            </div>
+            <div class="modal-body">
+                <ul>
+                  <li></li>
+                  <li></li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        $(function(){
+          // localStorage.getItem获取指定本地存储的值,set是存储。
+          var uname=localStorage.getItem('USERID');
+          $('.uname').html(uname)
+
+          var classItem=$('.class-list li')
+          $(classItem).click(function(){
+            classItem.removeClass('active')
+            $(this).addClass('active')
+          })
+
+          var classArr=['软信1班','移动1班','网销1班'];
+          var liContent='';
+          for(var i=0;i<classArr.length;i++){
+            liContent +='<li>'+classArr[i]+'</li>';
+          }
+         // $('.class-list').html(liContent);
+
+        })
+      </script>
 </body>
 </html>
