@@ -76,12 +76,85 @@
                 </div>
             </div>
             <!-- 右侧边栏 -->
-            <div class="col-md-10 col-lg-10 right">right</div>
+            <div class="col-md-10 col-lg-10 right">
+                <div class="right-content">
+                  <!-- 头部 -->
+                  <div class="right-header">
+                    <span>当前：首页-</span>
+                    <span class="right-class">1班</span>
+                  </div>
+                  <!-- 班级和搜索框 -->
+                  <div class="right-info">
+                    <div class="col-md-8">
+                      <span class="right-class">1班</span>
+                      
+                    </div>
+                    <div class="col-md-4">
+                      <div class="searchBox fr">
+                          <div class="searchInput fl">
+                            <input type="text" placeholder="用户名">
+                          </div>
+                          <div class="searchBtn fl">
+                            <input type="submit" >
+                          </div>
+                      </div>
+                     </div>
+                  </div>
+                  <!-- 按钮 -->
+                  <div class="col-md-12">
+                    <div class="right-btns">
+                      <!-- btn-default 是白色,info是蓝色,danger是红色,success是绿色 -->
+                      <button class="btn btn-default" data-toggle="modal" data-target="#myModal">添加</button>
+                      <button class="btn btn-info">修改</button>
+                      <button class="btn btn-danger">删除</button>
+                      <button class="btn btn-success">账号授权</button>
+                    </div>
+                  </div>
+                  
+                  <!-- 学生信息 -->
+                  <div class="col-md-12">
+                    <table class="table table-hover">
+                      <thead>
+                        <!-- tr表示行 th表头单元格 -->
+                        <tr>
+                          <th style="width: 2%;">
+                            <input type="checkbox">
+                          </th>
+                          <th style="width: 10%;">姓名</th>
+                          <th style="width: 10%;">学号</th>
+                          <th style="width: 15%;">手机号</th>
+                          <th style="width: 8%;">性别</th>
+                          <th style="width: 8%;">年龄</th>
+                          <th style="width: 20%;">专业</th>
+                          <th style="width: 27%;">操作</th>
+                        </tr>
+                      </thead>
+                      <tbody class="studnet-info">
+                        <!-- <tr>
+                          <td><input type="checkbox"></td>
+                          <td>张三丰</td>
+                          <td>001</td>
+                          <td>189999999</td>
+                          <td>男</td>
+                          <td>18</td>
+                          <td>移动应用开发</td>
+                          <td>
+                            <button class="btn btn-info">编辑</button>
+                            <button class="btn btn-danger">删除</button>
+                          </td>
+                        </tr> -->
+                      </tbody>
+                    </table>
+                  </div>
+
+                </div>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- $('#infoModal').modal('show') 表示再加载完页面时这个infoModal直接加载出来 -->
+
       <!-- 消息的Modal -->
       <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -116,8 +189,8 @@
             </div>
             <div class="modal-body">
                 <ul>
-                  <li></li>
-                  <li></li>
+                  <li>你要干嘛呀</li>
+                  <li>就不告诉你</li>
                 </ul>
             </div>
             <div class="modal-footer">
@@ -128,26 +201,278 @@
         </div>
       </div>
 
+      <!-- Modal新增&编辑 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><span class="stu-title">新增</span>学院信息</h4>
+      </div>
+      <div class="modal-body stu-modal-body">
+        <div class="col-md-12">
+          <div class="col-md-4">
+              <div class="e-tr">
+                  <label class="e-td" for="">姓名</label>
+                  <input class="e-td e-input e-name" type="text" placeholder="">
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="e-tr">
+                  <label class="e-td" for="">学号</label>
+                  <input class="e-td e-input e-sno" type="text" placeholder="">
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="e-tr">
+                  <label class="e-td" for="">手机号</label>
+                  <input class="e-td e-input e-tel" type="text" placeholder="">
+              </div>
+          </div>
+          <div class="col-md-4" role="form">
+              <div class="e-tr">
+                  <!-- <label class="e-td" for="">性别</label><input class="e-td e-input" type="text" placeholder="新蓝剑"> -->
+                  <label class="e-td" for="">性别</label>
+                  <select id="u-select" class="e-select" style="background-color: #fff;">
+                      <option value="m">男</option>
+                      <option value="f">女</option>
+                  </select>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="e-tr">
+                  <label class="e-td" for="" >年龄</label>
+                  <input class="e-td e-input e-age" type="text" placeholder="">
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="e-tr">
+                  <label class="e-td" for="">专&nbsp;&nbsp;&nbsp;&nbsp;业</label>
+                  <input class="e-td e-input e-major" type="text" placeholder="">
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary addEditBtn">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 删除的Modal -->
+<div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="delModalLabel">提示</h4>
+      </div>
+      <div class="modal-body">
+        <p>确定要删除吗？</p>
+        <p>此操作不可恢复</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary  del-sure">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+        <script src="./js/ls.js"></script>
+        <script src="./js/json.js"></script>
       <script>
+     
         $(function(){
-          // localStorage.getItem获取指定本地存储的值,set是存储。
-          var uname=localStorage.getItem('USERID');
+
+        //左侧激活班级索引
+        var  classIndex=0;
+        //右侧学生所在行的索引
+        var  trIndex=0;
+        //students_json_01来自json.js
+        var studentArr=[students_json_01.data,students_json_02.data]; 
+        //判断点击了那个确定按钮
+        //var editStatus='edit add';
+
+
+        showUserName();
+        showCurrentClass();
+        showStuInfo();
+
+          //显示当前用户
+          function showUserName(){
+            //get_value_from_storage()是ls.js中保存的本地信息
+            var uname=get_value_from_storage('USERID');
           $('.uname').html(uname)
+          }
+         // localStorage.getItem获取指定本地存储的值,set是存储。
+          //var uname=localStorage.getItem('USERID');
+          
 
-          var classItem=$('.class-list li')
-          $(classItem).click(function(){
-            classItem.removeClass('active')
-            $(this).addClass('active')
-          })
-
-          var classArr=['软信1班','移动1班','网销1班'];
+          //显示当前所有班级
+          function showCurrentClass(){
+            //class_json来自json.js
+            var classArr=class_json.data;
           var liContent='';
           for(var i=0;i<classArr.length;i++){
-            liContent +='<li>'+classArr[i]+'</li>';
+            liContent +='<li data-index='+ i +'>'+classArr[i].classname+'</li>';
+            // <td><input type="checkbox" name="" id=""></td>
+            //               <td>张三丰</td>
+            //               <td>001</td>
+            //               <td>189999999</td>
+            //               <td>男</td>
+            //               <td>18</td>
+            //               <td>移动应用开发</td>
+            //               <td>
+            //                 <button class="btn btn-info">编辑</button>
+            //                 <button class="btn btn-danger">删除</button>
+            //               </td>
           }
-         // $('.class-list').html(liContent);
+          $('.class-list').html(liContent);
+          $('.class-list li').eq(0).addClass('active');//.eq(0)默认显示第一个班级的信息
 
+          }
+       
+          //写死的li样式。
+          // $('.class-list li').click(function(){
+          //   $('.class-list li').removeClass('active')
+          //   $(this).addClass('active')
+          // })
+
+          //点击班级列表，切换相应的学生信息。  
+          //事件代理/事件委托(delegate)增加li后的样式
+          $('.class-list').delegate('li','click',function(){
+            $('.class-list li').removeClass('active');
+            $(this).addClass('active');
+
+            //更新班级索引
+            classIndex=$(this).attr('data-index');
+            
+            //将拿到的ul值换掉右边的值。
+            //$('.right').html($(this).html());
+
+             // 更新右侧班级名称
+              var classTxt = $(this).html();
+              $('.right-class').html(classTxt);
+              showStuInfo();
+              
+          })
+          
+          //原生js写法 后来生成。
+          // var ul=document.getElementsByclssIndex('class-list')[0];
+          // ul.addEventListener('click',function(e){
+          //   if(e.target && e.target.nodeName.toUpperCase=='LI'){
+          //      //target指向事件发生时的元素;nodeName指定节点的节点名称;toUpperCase() 方法用于把字符串转换为大写。
+          //      console.log("li被点击了")
+          //   }
+           
+          // })
+
+        //显示学生信息
+        function showStuInfo(){
+        var studentContent='';
+        for(var i=0;i<studentArr[classIndex].length;i++){
+          studentContent+="<tr  data-index="+i+"><td><input type='checkbox'></td>"+
+            "<td>"+studentArr[classIndex][i].truename+"</td>"+
+            "<td>"+studentArr[classIndex][i].sno+"</td>"+
+            "<td>"+studentArr[classIndex][i].tel+"</td>"+
+            "<td>"+(studentArr[classIndex][i].gender=='m'?'男':'女')+"</td>"+
+            "<td>"+studentArr[classIndex][i].age+"</td>"+
+            "<td>"+studentArr[classIndex][i].major+"</td>"+
+            "<td><button class='btn btn-edit btn-info btn-index' data-toggle='modal' data-target='#myModal'>编辑</button>"+
+            "<button class='btn btn-del btn-danger btn-index' data-toggle='modal' data-target='#delModal'>删除</button></td></tr>"
+
+        }
+        $('.studnet-info').html(studentContent);
+
+        }
+
+              // //事件代理/事件委托(编辑)/删除
+              // $('.student-info').delegate('.btn-index','click',function(){
+              //   //parents向上找父元素(不至一个）
+              //   trIndex =($(this).parents('tr').attr('data-index'));
+              //   console.log(studentArr[classIndex][trIndex]);
+              // //对于HTML元素本身就带有的固有属性，在处理时，使用prop方法。对于HTML元素我们自己自定义的DOM属性，在处理时，使用attr方法。
+              //   //“checked”和“selected”使用prop。  
+              //   //$(this).parents('tr').find('input').prop('checkbox',true)
+              // })
+
+        // 获取学生在本班级中的序号
+      $('.studnet-info').delegate('.btn-index', 'click', function() {
+        trIndex = $(this).parents('tr').attr('data-index');
+      })
+
+      // 编辑学生信息
+      $('.studnet-info').delegate('.btn-edit', 'click', function() {
+        $('.stu-title').html('编辑');
+        var stu=studentArr[classIndex][trIndex];
+        // 讲该学生的信息填入对应输入框
+        $('.e-name').val(stu.truename);
+        $('.e-sno').val(stu.sno);
+        $('.e-tel').val(stu.tel);
+        $('.e-select').val(stu.gender);
+        $('.e-major').val(stu.major);
+        $('.e-age').val(stu.age);
+        // 当前编辑状态：编辑
+        $('.addEditBtn').attr('edit-status', 'edit');
+      })
+
+      // 新增学生信息
+      $('.add-stu-btn').click(function() {
+        // 置空输入框
+        $('.e-name').val('');
+        $('.e-sno').val('');
+        $('.e-tel').val('');
+        $('.e-select').val('m');
+        $('.e-major').val('');
+        $('.e-age').val('');
+        // 当前编辑状态：新增
+        $('.addEditBtn').attr('edit-status', 'add');
+      })
+
+      // 新增或编辑学生的保存按钮
+      $('.addEditBtn').click(function () {
+        var stu = {};
+        // 获取输入框中的学生数据
+        stu.truename = $('.e-name').val();
+        stu.sno = $('.e-sno').val();
+        stu.tel = $('.e-tel').val();
+        stu.gender = $('.e-select').val();
+        stu.major = $('.e-major').val();
+        stu.age = $('.e-age').val();
+        // 判断是新增还是编辑
+        var status = $(this).attr('edit-status');
+        
+        if(status === 'add'){
+          studnetArr[classIndex].push(stu);//添加
+        } else {
+         
+          studentArr[classIndex].splice(trIndex*1,1,stu);
+        }
+        // 用新的数据更新页面
+        showStuInfo();
+        // 关闭模态框
+        $('#myModal').modal('hide');
+      })
+
+      
+
+
+        //删除学生信息
+        $('.del-sure').click(function(){
+        //splice() 方法向/从数组中添加/删除项目，然后返回被删除的项目。
+        //删掉对应的学生信息
+        studentArr[classIndex].splice(trIndex*1,1);
+        //用新的数据更新页面
+        showStuInfo();
+        // 关闭模态框
+        $('#delModal').modal('hide');
         })
+      
+          
+      })
       </script>
 </body>
 </html>

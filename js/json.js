@@ -12,10 +12,10 @@ var class_json = {
         }
     ]
 };
-
+//学生信息 json方法
 var students_json_01 = {
-    "resultCode": 200,
-    "resultMessage": "ok",
+    "resultCode": 200,//状态码
+    "resultMessage": "ok",//是返回给用户的提示信息
     "data": [
         {
             "id": "1",
