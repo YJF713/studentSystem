@@ -25,3 +25,16 @@
     })
 
 ```
+
+#### 本地存储
+- 使用localstorage.setItem(name,value)存储JSON对象时会发现浏览器存储的内容为[object,object]
+- 则JSON.stringify(object)进行类型转换，转换成JSON字符串后进行存储就会是我们想要的样子了。
+- 因为stringify保存的是字符串类型，取出需要用到 ：parse（将字符串转换成数字）
+
+
+
+        var stuStr=JSON.stringify(studentArr);
+        localStorage.setItem('stuInfo',stuStr);
+
+        JSON.parse(localStorage.getItem('stuInfo')//转换
+
