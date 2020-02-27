@@ -296,10 +296,27 @@
         //判断点击了那个确定按钮
         //var editStatus='edit add';
 
-
+        saveStuInfo(false);//先存数据再显示数据。
         showUserName();
         showCurrentClass();
         showStuInfo();
+       
+
+          //学生信息的本地持久存储。
+          function saveStuInfo(flag){
+            //没有localStorage，存到本地
+            if(!localStorage.getItem('stuInfo')||flag){//没有数据的时候
+              var stuStr=JSON.stringify(studentArr);//JSON.stringify存储信息转换字符串.parse将字符串转换成数字
+              localStorage.setItem('stuInfo',stuStr);//本地存储来使用localStorage
+              // localStorage.getItem('stuInfo',[0][0].age);
+            }else{
+              //有localStorage，就用这个。
+              studentArr=JSON.parse(localStorage.getItem('stuInfo'));
+            }
+          
+      
+          }
+
 
           //显示当前用户
           function showUserName(){
@@ -452,7 +469,9 @@
           studentArr[classIndex].splice(trIndex*1,1,stu);
         }
         // 用新的数据更新页面
+        saveStuInfo(true);
         showStuInfo();
+        
         // 关闭模态框
         $('#myModal').modal('hide');
       })
@@ -466,7 +485,9 @@
         //删掉对应的学生信息
         studentArr[classIndex].splice(trIndex*1,1);
         //用新的数据更新页面
+        saveStuInfo(true);
         showStuInfo();
+        
         // 关闭模态框
         $('#delModal').modal('hide');
         })
