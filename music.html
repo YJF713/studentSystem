@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery-3.3.1.min.js"></script>
+    <style>
+        .content{
+            width: 500px;
+            height: 300px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            overflow: scroll;
+        }
+    </style>
+</head>
+<body>
+    <input class="song-id" type="text" value="28012031" placeholder="请输入歌曲id"><br>
+    <label for="song">歌曲</label><input id="song" type="radio" name="detail" value="song"><br>
+    <label for="lyric">歌词</label><input id="lyric" type="radio" name="detail" value="lyric"><br>
+    <label for="comments">评论</label><input id="comments" type="radio" name="detail" value="comments"><br>
+    <label for="detail">详情</label><input id="detail" type="radio" name="detail" value="detail"><br>
+    <br>
+    <button class="btn">查看</button>
+    <p class="content"></p>
+
+    <script>
+        $(function(){
+            $('.btn').click(function(){
+                var url='https://api.imjad.cn/cloudmusic/?type=song&id=28012031&br=128000';
+                var id=$('.song-id').val();//取歌曲id
+                var type=$('input[type=radio]:checked').val();//获取点击的值。
+                $.ajax({
+                   // url:'https://api.imjad.cn/cloudmusic/?type='+type+'&id='+id+'&br=128000',
+                    //url:`https://api.imjad.cn/cloudmusic/?type=${type}&id=${id}&br=128000`,
+                    url:`https://api.imjad.cn/cloudmusic/`,
+                    method:'GET',
+                    data:{
+                        type:type,
+                        id,//e6方法
+                        br:'128000'
+
+                    },
+                    success:function(data){
+                        var text=''
+                        if(type=='lyric'){
+                            text=data.tlyric.lyric
+                        }else if(type=='song'){
+                            text=`下载地点：<a href=${data.data[0].url} taeget=_blank>点击下载</a>`
+                        }else if(type=='detail'){
+                            text = `专辑名称：${data.songs[0].alia}<br>歌手：${data.songs[0].ar[0].name}
+                             <br><img src=${data.songs[0].al.picUrl}>`
+                        }
+                         console.log(data)
+                         $('.content').html(text);
+                         }
+                    
+                })
+            })
+
+        })
+    </script>
+</body>
+</html>

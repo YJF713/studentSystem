@@ -512,6 +512,23 @@
         // $('.all-check').prop('checked', $('.stu-check:checked').length == $('.stu-check').length);
       })
 
+      $('.jx-logo').click(function(){
+      var url='https://api.imjad.cn/cloudmusic/?type=song&id=28012031&br=128000';
+       
+        $.ajax({
+          url:url,
+          method:'GET',
+          success: function(res){
+              console.log(res.data[0].url)
+              alert('当前歌曲格式：'+res.data[0].encodeType)
+              //跳转界面
+              window.location.href=res.data[0].url
+             // window.open(res.data[0].url);
+        
+          }
+        })
+
+      })
 
           
       })
