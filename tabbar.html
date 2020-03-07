@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选项卡</title>
+    <style>
+        body,div,p,input{
+            margin: 0;
+            padding: 0;
+        }
+        /* reset css end 样式重置 */
+        .tabbar{
+            margin-left: 100px;
+        }
+        .btn{
+            float: left;
+            border: 1px solid #ccc;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+            /* 上左，上右圆角 */
+            padding: 5px 15px;
+            cursor: pointer;
+            /* 鼠标放上去变手 cursor*/
+            background-color: orange;
+            color: #fff;
+
+        }
+        .clear{
+            clear: both;
+        }
+
+        #content{
+            width: 500px;
+            height: 300px;
+            border: 1px solid #ccc;
+            padding: 20px;
+           background:linear-gradient(to bottom,#56a5f1,#fff);
+           /* 由上往下背景渐变 */
+           position: relative;
+           top: -1px;
+           z-index: -1;
+           /* 清除边框 */
+        }
+        .checked{
+            background-color: #56a5f1;
+            border-bottom: 1px solid #56a5f1;
+        }
+        .id{
+            display: block;
+            width: 300px;
+            height: 30px;
+            line-height: 30px;
+            font-size: 16px;
+            margin: 20px auto;
+            padding-left: 10px;
+            border-radius: 4px;
+            border: 2px solid #56a5f1;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- autofocus光标自动加入 -->
+    <input class="id" type="text" autofocus placeholder="请输入你的id">
+    <div class="tabbar">
+        <div class="btn checked">首页</div>
+        <div class="btn ">音乐</div>
+        <div class="btn ">新闻</div>
+        <div class="clear"></div>
+        <div id="content"></div>
+    </div>
+    <script>
+        let HomeContent='这是首页的内容';
+        let musicContent='这是音乐的内容';
+        let NewContent='这是新闻的内容';
+        let textContent=[];
+        textContent.push(HomeContent,musicContent,NewContent);
+        //显示默认内容。
+        content.innerHTML=textContent[0]
+        
+        //点击切换
+        let btn=document.querySelectorAll('.btn');
+        //选择所有的btn   querySelectorAll
+        console.log(btn)
+        //保存当前激活的按钮
+        let checkedBtn=btn[0]
+        for(let i=0;i<btn.length;i++){
+            let obj=btn[i];
+            obj.btnIndex=i;
+            obj.onclick=function(e){
+                console.log(e.target.btnIndex)
+               //修改显示内容
+                content.innerHTML=textContent[e.target.btnIndex];
+                //修改样式
+                checkedBtn.classList.remove('checked');
+                this.classList.add('checked');
+                checkedBtn=e.target;
+                //跟新checkedBtn值。
+
+            }
+        }
+    </script>
+</body>
+</html>

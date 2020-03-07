@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#00B54D</title>
+    <style>
+        body{
+            width: 375px;
+            background-color: #00B54D;
+        }
+        h1{
+            text-align: center;
+        }
+        .search{
+            display: block;
+            width: 340px;
+            height: 28px;
+            line-height: 28px;
+            text-indent: 45%;
+            /* text-indent文字位置 */
+            margin: 0 auto;
+            border-radius: 6px;
+            outline: none;
+            /*  外边框(outline)不显示 */
+            border: none;
+        }
+        .content{
+            width: 100%;
+            background-color: #fff;
+        }
+        /* .mov{
+            display: inline-block;
+        } */
+    </style>
+</head>
+<body>
+    <h1>首页</h1>
+    <input class="search" type="text" placeholder="搜索">
+    <div class="content">
+        <div class="in_theaters">
+            <span>影院热映</span>
+            <span>查看跟多</span>
+            <div class="movie-item">
+                
+            </div>
+        </div>
+
+        <div></div>
+        <div></div>
+    </div>
+
+    <script src="./js/jquery-3.3.1.min.js"></script>
+    <script src=".//js/ajax.js"></script>
+    <script>
+        $(function(){
+            let arr=[
+            {
+            "rating": {
+			"max": 10,
+			"average": 7.0,
+			"details": {
+				"1": 415.0,
+				"3": 12021.0,
+				"2": 2332.0,
+				"5": 3394.0,
+				"4": 10483.0
+			},
+			"stars": "35",
+			"min": 0
+		},
+		"genres": ["剧情", "动作"],
+		"title": "叶问4：完结篇",
+		"casts": [{
+			"avatars": {
+				"small": "https://img9.doubanio.com\/view\/celebrity\/s_ratio_celebrity\/public\/p10695.jpg",
+				"large": "https://img9.doubanio.com\/view\/celebrity\/s_ratio_celebrity\/public\/p10695.jpg",
+				"medium": "https://img9.doubanio.com\/view\/celebrity\/s_ratio_celebrity\/public\/p10695.jpg"
+			},
+			"name_en": "Donnie Yen",
+			"name": "甄子丹",
+			"alt": "https:\/\/movie.douban.com\/celebrity\/1025194\/",
+			"id": "1025194"
+		}, {
+			"avatars": {
+				"small": "https://img9.doubanio.com\/view\/celebrity\/s_ratio_celebrity\/public\/p45924.jpg",
+				"large": "https://img9.doubanio.com\/view\/celebrity\/s_ratio_celebrity\/public\/p45924.jpg",
+				"medium": "https://img9.doubanio.com\/view\/celebrity\/s_ratio_celebrity\/public\/p45924.jpg"
+			},
+			"name_en": "Yue Wu",
+			"name": "吴樾",
+			"alt": "https:\/\/movie.douban.com\/celebrity\/1314321\/",
+			"id": "1314321"
+		}, {
+			"avatars": {
+				"small": "https://img3.doubanio.com\/view\/celebrity\/s_ratio_celebrity\/public\/p1366445006.32.jpg",
+				"large": "https://img3.doubanio.com\/view\/celebrity\/s_ratio_celebrity\/public\/p1366445006.32.jpg",
+				"medium": "https://img3.doubanio.com\/view\/celebrity\/s_ratio_celebrity\/public\/p1366445006.32.jpg"
+			},
+			"name_en": "Vanness Wu",
+			"name": "吴建豪",
+			"alt": "https:\/\/movie.douban.com\/celebrity\/1201063\/",
+			"id": "1201063"
+		}],
+		"durations": ["107分钟"],
+		"collect_count": 226157,
+		"mainland_pubdate": "2019-12-20",
+		"has_video": true,
+		"original_title": "葉問4",
+		"subtype": "movie",
+		"directors": [{
+			"avatars": {
+				"small": "https://img1.doubanio.com\/view\/celebrity\/s_ratio_celebrity\/public\/p1524904218.27.jpg",
+				"large": "https://img1.doubanio.com\/view\/celebrity\/s_ratio_celebrity\/public\/p1524904218.27.jpg",
+				"medium": "https://img1.doubanio.com\/view\/celebrity\/s_ratio_celebrity\/public\/p1524904218.27.jpg"
+			},
+			"name_en": "Wilson Yip",
+			"name": "叶伟信",
+			"alt": "https:\/\/movie.douban.com\/celebrity\/1274472\/",
+			"id": "1274472"
+		}],
+		"pubdates": ["2019-12-20(中国大陆)"],
+		"year": "2019",
+		"images": {
+			"small": "https://img9.doubanio.com\/view\/photo\/s_ratio_poster\/public\/p2577437186.jpg",
+			"large": "https://img9.doubanio.com\/view\/photo\/s_ratio_poster\/public\/p2577437186.jpg",
+			"medium": "https://img9.doubanio.com\/view\/photo\/s_ratio_poster\/public\/p2577437186.jpg"
+		},
+		"alt": "https:\/\/movie.douban.com\/subject\/26885074\/",
+		"id": "26885074"
+	
+        }
+    ];
+            $('.search').click(function(){
+                let movArr=[]
+                // 通过localStorage判断是否有数据
+                $.ajax({
+                   url:in_theaters,
+                   success:function(result){
+                        movArr = result.subjects;
+                        // $.each(movArr)
+                        let text=``;
+                        for(let i=0;i<movArr.length;i++){
+                            text+=`<div><img src=${movArr[i].images.small} alt=""><p>${movArr[i].title}</p></div>`
+                        
+                        }
+                          $('.movie-item').html(text);
+                   } 
+                })
+
+
+            })
+
+
+        })
+
+    </script>
+
+</body>
+</html>

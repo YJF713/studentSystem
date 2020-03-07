@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地点选择器</title>
+</head>
+<body>
+    <script>
+        //新增label标签以及对应内容 
+        //注意:innerHTML和innerText的区别
+        //1、创建一个标签createElement 2、添加内容。3、将内容追加到body
+        let label=document.createElement('label');
+        label.innerHTML='请选择省份：';
+        document.body.appendChild(label);
+
+        //新增省份的select标签,通过循环写入内容
+        let proSelect=document.createElement('select')
+        let proArr=['河南省','广东省','浙江省','江苏省'];
+       
+        for(let i=0;i<proArr.length;i++){
+            let option=document.createElement('option');
+            option.innerHTML=proArr[i];
+            console.log(proArr)
+            option.value=i;//65行
+            proSelect.appendChild(option);
+            //proSelect将内容添加到父元素
+        }
+        document.body.appendChild(proSelect);
+
+        //准备市的数据.是一个二维数组.
+        let cityArr=[];
+        let citySelect=document.createElement('select')
+        let city0=['商丘市','林州市','郑州市','开封市']
+        let city1=['广州市','珠海市','深圳市','惠州市']
+        let city2=['杭州市','宁波市','嘉兴市','丽水市']
+        let city3=['常州市','南京市','泰州市','常州市']
+        // let cityArr=[city0,city1,city2,city3];
+        cityArr.push(city0);
+        cityArr.push(city1);
+        cityArr.push(city2);
+        cityArr.push(city3);
+        
+        //显示默认数据,index为0
+        for(let i=0;i<cityArr[0].length;i++){
+            let option=document.createElement('option');
+            option.innerHTML=cityArr[0][i];
+            citySelect.appendChild(option);
+            //proSelect将内容添加到父元素
+        }
+        document.body.appendChild(citySelect);
+
+        //响应用户操作
+        proSelect.onchange=function(even){
+            console.log(even.target.value);
+            let opts=citySelect.children;
+            //删除旧城市
+            for(let i=opts.length-1;i>=0;i--){
+                citySelect.removeChild(opts[i])
+            }
+           // document.body.appendChild(citySelect)
+
+            //增加新城市
+            //this 即  even.target.value
+              for(let i=0;i<cityArr[this.value].length;i++){
+            let option=document.createElement('option');
+            option.innerHTML=cityArr[this.value][i];
+            citySelect.appendChild(option);
+            //proSelect将内容添加到父元素
+        }
+            document.body.appendChild(citySelect);
+
+        }
+
+        
+    </script>
+</body>
+</html>
