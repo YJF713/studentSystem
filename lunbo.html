@@ -9,7 +9,7 @@
             width: 600px;
             height: 500px;
             margin: 0 auto;
-            border: 1px solid  #56a5f1;
+            /* border: 1px solid  #56a5f1; */
             position: relative;
             overflow: hidden;
         }
@@ -26,6 +26,36 @@
             left: 0;
             可以使用这个设置第一个的图片。
         }*/
+        /* 小圆点的公用样式 */
+        .page-control{
+            width: 10px;
+            height: 10px;
+            border: 1px solid #fff;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 20px;
+            z-index: 6;
+            cursor: pointer;
+            /* 鼠标变手势 */
+        }     
+
+        /* 小箭头的公用样式 */
+        .arrow{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            position: absolute;
+            top: 225px;
+            background-image: url('./images/silde_next.png');
+            background-position: -5px center;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .right{
+            right: 0px;
+            background-position: -60px center;
+        }
     
     </style>
 </head>
@@ -39,55 +69,117 @@
     </div>
 
     <script>
-        // 获取父容器的宽度。
+           var pic=0;
+        // 获取父容器的宽度。初始化
          let sWidth=silder.clientWidth;
          //let imgs=document.getElementsByTagName('img');
-        let imgs=document.querySelectorAll('.item');
-        for(let index=0;index<imgs.length;index++){
-            imgs[index].style.left= `${index*sWidth}px`;
+        let imgs=document.getElementsByClassName('item');
+        for(let i=0;i<imgs.length;i++){
+            imgs[i].style.left= `${i*sWidth}px`;
             // imgs[index].style.left= index*sWidth +'px';
             //一次写多个样式：div.style.cssText=''
         }
-        let pic=0;
-        //计算如何播放
-        function computed(){
-            pic++;
-            if(pic>imgs.length-1){
-                pic=imgs.length-1
-            }
-            moveSlider();
-        }
-        //执行具体播放
-       function moveSlider(){
-        for(let index=0;index<imgs.length;index++){
-            imgs[index].style.left= `${(index-pic)*sWidth}px`;
-        }
-   
-        //最后一张图片
-        if(pic==imgs.length-1){
-            setInterval(function(){
-                pic=0;
-            for(let index=0;index<imgs.length;index++){
-            imgs[index].style.left= `${index*sWidth}px`;
-            imgs[index].style.transition='none';
-           
+
+        //生成小圆点
+        for(let i=0;i<imgs.length-1;i++){
+            let div=document.createElement('div');//createElement创建一个按钮
+            div.classList.add('page-control');//classList该属性用于在元素中添加、移出、切换css类。
+            div.index=i;//增加索引，方便点击
+            silder.appendChild(div);//添加新的子节点。
+            //结合律和分配律
+            div.style.left=sWidth/2+i*20-((imgs.length-1)*10+(imgs.length-1-1)*10)/2+'px';
+            //依次绑定事件
+            div.onclick=function(e){
+                // console.log(e.target.index);
+                pic=e.target.index-1;
+                computed();
             }
 
-            setInterval(function(){
-                for(let index=0;index<imgs.length;index++){
-                imgs[index].style.transition='left 0.7s ease-in-out';
-            }
-            },100)
-            },700)
-        
         }
- 
-    }
+        setBgColor(0);//默认给第一个小圆点加上颜色
         
-        //间隔调用
-        setInterval(() => {
-            computed()
-        }, 1000);
+        //生成小箭头
+        let leftArrow=document.createElement('div');
+        silder.appendChild(leftArrow);
+        leftArrow.classList.add('arrow');
+        let rightArrow=document.createElement('div');
+        silder.appendChild(rightArrow);
+        rightArrow.classList.add('arrow','right');
+
+
+        //计算如何播放
+        function computed() {
+            pic ++;
+            if (pic > imgs.length - 1 ){
+                pic = imgs.length - 1;
+             }  
+             moveSlider();
+        }
+        //给小箭头绑定事件
+        leftArrow.onclick=function(){
+            computed();
+            clearTimer(timer);
+            timer=setInterval(() => {
+              computed()
+             }, 3000);
+            
+        }
+        rightArrow.onclick=function(){
+            pic--;
+            if(pic<0){
+                pic=0;
+            }
+            moveSlider();
+            clearTimer(timer);
+            timer=setInterval(() => {
+              computed()
+            }, 3000);
+        }
+
+        //执行具体播放
+       function moveSlider(){
+        for(let i=0;i<imgs.length;i++){
+            imgs[i].style.left= `${(i-pic)*sWidth}px`;
+        }
+        //最后一张图片
+        if(pic==imgs.length-1){
+            setTimeout(() => {
+                pic=0;
+            for(var index=0;index<imgs.length;index++){
+            imgs[index].style.left= `${index*sWidth}px`;
+            imgs[index].style.transition='none';
+            }
+            setTimeout(function(){
+                for(var index=0;index<imgs.length;index++){
+                imgs[index].style.transition='left 0.7s ease-in-out';
+             }
+          },100);
+         },700);  
+        }
+        setBgColor(pic);
+    }
+          //设置小圆点的背景颜色
+          function setBgColor(num){
+                let pageControl=document.querySelectorAll('.page-control');
+            for(let i=0;i<imgs.length-1;i++){
+                pageControl[i].style.backgroundColor='';
+            }
+            if(num==4){
+                pageControl[0].style.backgroundColor='#fff';
+            }else{
+                pageControl[num].style.backgroundColor='#fff';
+            }
+           
+        }
+
+    //清除定时器
+        function clearTimer(t){
+            clearInterval(t);
+        }
+       //间隔调用
+           var timer=setInterval(()=>{
+                computed();
+       }, 3000);
     </script>
 </body>
 </html>

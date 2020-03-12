@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组</title>
+    <style>
+        #div2{
+            margin: 20px 0;
+            width: 220px;
+            border: 1px solid #eee;
+        }
+        .hero{
+            display: inline-block;
+            width: 50px;
+            height: 22px;
+            line-height: 22px;
+            text-align: center;
+            border-left: 1px solid #eee;
+        }
+        /* 子集选择器 */
+        .hero:first-child{
+            border-left: none;
+        }
+
+        .line{
+            border-top: 1px solid #eee;
+        }
+        .line:first-child{
+            border-top: none;
+        }
+
+        /* 隔行换色 */
+        .line:nth-child(2n){
+            background-color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <table id="table"></table>
+    <script>
+        //乘法表
+        let src='';
+        for(let i=1;i<=9;i++){
+            //src +=`<div>`
+            for(let index=1;index<=i;index++){
+               src += `${i}X${index}=${i*index}\t`;
+            }
+            src+=`<br>`
+            //src +=`</div>`
+        }
+       div1.innerHTML=src;
+
+       let row1=['宋江','卢俊义','吴用','公孙策'];
+        let row2=['关胜','林冲','柴进','鲁智深'];
+        let row3=['孙二娘','扈三娘','顾大娘','潘金莲'];
+        let row4=['高俅','蔡京','童贯','宋微宗'];
+        let heroArr=[row1,row2,row3,row4];
+        let heroText='';
+        for(var row=0;row<heroArr.length;row++){
+            heroText+=`<div class='line'>`
+            for(var col=0;col<heroArr[row].length;col++){
+            heroText += `<span class='hero'>${heroArr[row][col]}</span>`;
+        }
+        heroText+=`</div>`
+        }
+        div2.innerHTML=heroText;
+       
+    </script>
+</body>
+</html>
